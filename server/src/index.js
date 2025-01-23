@@ -1,8 +1,9 @@
 const express = require("express");
-const userRoutes = require("./routes/users.routes");
 const app = express();
 const cors = require("cors");
-const port = 3000;
+const mongoose = require("mongoose");
+const movieRoutes = require("./routes/movies.routes");
+require("dotenv").config();
 
 const corsOptions = {
   origin: "*", // Orígenes permitidos
@@ -13,8 +14,19 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use("/", userRoutes);
+app.use("/api/movies", movieRoutes);
+app.use("/api/products", productsRoutes);
 
-app.listen(port, () => {
-  console.log("Server is running on port" + port);
-});
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Database Connected");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port" ${process.env.PORT}`);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+startServer();
