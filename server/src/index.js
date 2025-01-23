@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const movieRoutes = require("./routes/movies.routes");
+const productsRoutes = require("./routes/products.routes");
 require("dotenv").config();
 
 const corsOptions = {
