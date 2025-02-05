@@ -33,3 +33,4 @@ const startServer = async () => {
 startServer();
 
 //npm install mongoose
+//npm install dotenv
